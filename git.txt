@@ -1,0 +1,194 @@
+Resources:
+    - https://www.youtube.com/watch?v=3RjQznt-8kE&list=PL4cUxeGkcC9goXbgTDQ0n_4TBzOO0ocPR
+------------------------------------------------------------------------------------------------------------------------
+
+- create a new repository on the command line
+    _ echo "# testing" >> README.md
+    _ git init
+    _ git add README.md
+    _ git commit -m "first commit"
+    _ git branch -M main
+    _ git remote add origin https://github.com/ibnshabir/testing.git    (origin is just an alias(like a variable) for this url)
+    _ git push -u origin main
+
+- push an existing repository from the command line
+    _ git remote add origin https://github.com/ibnshabir/testing.git
+    _ git branch -M main
+    _ git push -u origin main
+    or use the following command
+    _ git push --set-upstream origin "branch-name"
+
+------------------------------------------------------------------------------------------------------------------------
+
+- Commands:
+    - git init:
+        _ used to initialize a blank repository
+        _ creates a .git folder in current working directory
+            - hidden folder
+        - whenever a git repo created, it creates a default branch called master
+
+    - git commit:
+        - used to save changes to local repository
+        - helps keep record of all the changes made
+        - should be done at logical points
+            _ at certain checkpoints
+                - ex: MyProject versions
+                - or when hit a milestone in your program
+                - or even by the end of the day (you choose when to do it)
+        - over committing is not good
+            _ that is why there is a staging area
+                - pycharm -> staging area -> commit
+                    _ moving files to the staging area is done in add
+        - once files have been added to staging area and your are ready to commit
+            _ git commit -m "put a descriptive message here"
+            _ git log     -> this will display the commits and details regarding them
+            _ git log --oneline -> this will display the commits in a one liner
+
+        - Undoing Commits:
+            _ Checkout Commit:
+                - just see what the previous commit is
+                - read only, therefore can't modify
+                    _ git checkout "commit-id"
+                    _ git checkout master
+            _ Revert Commit:
+                - undoing a particular commit
+                    _ git revert "commit-id"    (will take to another screen)
+                    _ Shift + : + wq (to go back to the main screen)
+                - will not delete that commit
+                    _ will crate another commit with revert and name of that commit
+
+            _ Reset Commit:
+                _ as if going back in time
+                _ resetting to a previous commit
+                    _ git reset "commit id"
+                        - NOTE: will undo any changes made after that commit
+                                but will store those commits in an editor
+                                    _ can access them
+                    _ git reset "commit-id" --hard
+                        - this will permanently delete later commits
+                        - be careful in using this
+
+    - git add:
+        - used to add changes in the current directory to the staging area
+        - used before commit
+        - when used with a full stop, adds all the files to staging area
+        - git add fileName             -> will add the file to the staging area
+        - git rm --cached git-fileName -> this will remove the file from the staging area
+        - git add .                    -> this will add all the files in this project to the staging area
+        - git add --all                -> if have other files from different projects,
+                                            this will only add the files of the current folder
+     - git branch:
+        - used to create, list rename, and delete branches
+
+        - Branches:
+            - to test different features
+            - without adding commits to main (master)
+            - can merge later (merge commit)
+            - if doesn't work, can delete this branch
+            - good for group work
+                _ work in own branches
+                _ merge later
+            _ git branch "branch-name"  (to create new branch)
+            _ git branch -a             (will show all the branches)
+            _ git checkout "branch-name" (will switch to selected branch)
+            _ git branch -D "branch-name" (will delete the branch)
+                - use capital D if branches not merged
+                - NOTE: will not delete if on that branch
+            _ git checkout -b "branch-name" (will create new branch and checkout as well)
+
+      - git checkout:
+        - works together with the git branch command
+        - enables navigation between the branches
+
+    - git merge:
+        - used to integrate different branches into a single branch
+        - defined as putting a forked history back together
+
+        - Merge Branches:
+            - NOTE: need to be on branch want to merge to (ex: main)
+                _ git merge "branch-name"
+        -Conflict:
+            - if your teammate made changes in the main branch
+                _ Ex: a css file property has been changed in main
+                    _ you are not aware of it, so you make changes on your branch
+                    _ upon merging, it will generate an error (of conflict)
+                    _ will also display the conflict
+                    _ needs the conflict to be resolve prior to committing it
+                    - therefore need to do it manually
+
+                        - sample of the conflict:
+
+                            print('this will be committed to the main branch')
+                            <<<<<<< HEADhttps://www.youtube.com/watch?v=3RjQznt-8kE&list=PL4cUxeGkcC9goXbgTDQ0n_4TBzOO0ocPR
+                            print('change made by main')
+                            =======
+                            print('this will be committed to main from ali-branch')
+                            >>>>>>> ali-branch
+
+            - After resolving the issue, commit
+                _ don't need to type message in this commit (as it's a merge commit)
+
+    - git status:
+        - used to display the state of the current repo and the staging area
+        - lets us see, which changes have or haven't been staged, or which files are not being tracked yet
+        - therefore shows what is happening with git add and git commit
+        - contains useful info for staging and un-staging the files
+
+    - git push:
+        - used to push the local repository content to a remote repository
+        - NOTE: When working with team, avoid pushing to the main branch
+                push to your branch, let everyone review, if good, then push to main
+        - git push origin "branch-name"
+        -NOTE: I think even git push would work the same as long as checkout on that branch
+                maybe done as precaution
+
+    - git pull:
+        - used to fetch new commits in remote repo and merge them into local repo
+        - Question: Do i have to be on the main branch to pull or can i pull by being on my branch
+
+    - git clone:
+        - used to create a copy of the target repository in a  new directory at a new place
+            _ git clone "url-of-repo"
+
+    - git config:
+        - used to set config like name, email etc
+        - should be provided as soon as Git is installed
+            _ since it is used by Git at every commit
+
+    - git diff:
+        - a multi-use command
+            _runs functions on diff git data sources
+        - used to show differences between the changes made on a file
+
+    -git log:
+        - used to view the previous commits on a project
+        - a tool to look at the history/activity of a repository
+        - shows recent actions on top
+
+    - git reset:
+        - undo local changes made to the state of Git repo
+        - it has three primary forms:
+            _ soft
+            _ mixed
+            _ hard
+
+    - git rebase:
+        - rebasing means moving or combining a sequence of commits
+        - used to integrate changes from one branch to another
+
+------------------------------------------------------------------------------------------------------------------------
+
+- Other Commands:
+    - git --version:
+        - tells current version
+
+    - git config --global user.name "your name"
+    - git config -- user.email "example@email.com"
+    - git config user.name (displays user.name)
+    - git config user.email (displays user.email)
+
+    - git help<verb> or git <verb> --help
+        _ ex: git help config or git config --help
+
+    - git reset name_of_file
+        _ will remove this file from the  staging area
